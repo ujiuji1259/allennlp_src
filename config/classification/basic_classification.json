@@ -2,18 +2,21 @@
     "dataset_reader": {
         "type": "text_classification_json",
         "tokenizer": {
-            "type": "spacy"
+            "type": "mecab",
+            "dic_path": "/opt/mecab/lib/mecab/dic/mecab-ipadic-neologd",
+            "use_user_dic": true,
+            "user_dic_path": "/opt/mecab/lib/mecab/dic/MANBYO_201907_Dic-utf8.dic"
         },
         "token_indexers": {
             "tokens": {
                 "type": "single_id",
-                "lowercase_tokens": true
+                "lowercase_tokens": false
             }
         },
         "max_sequence_length": 400
     },
-    "train_data_path": "/home/is/ujiie/dataset/agnews/train.jsonl",
-    "validation_data_path": "/home/is/ujiie/dataset/agnews/test.jsonl",
+    "train_data_path": "/home/is/ujiie/sample.txt",
+    "validation_data_path": "/home/is/ujiie/sample.txt",
     "data_loader": {
         "batch_sampler": {
             "type": "bucket",
