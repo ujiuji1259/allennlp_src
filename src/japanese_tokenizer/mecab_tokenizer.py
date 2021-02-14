@@ -22,7 +22,7 @@ class MecabTokenizer(Tokenizer):
                  use_user_dic: bool = False,
                  user_dic_path: str = None):
 
-        if use_user_dic:
+        if not use_user_dic:
             self.tokenizer = MeCab.Tagger(f'-Owakati -d {dic_path}')
         else:
             assert user_dic_path is not None, "Please specify user dictionary path if you add user dictionary to system dictionary"

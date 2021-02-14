@@ -15,7 +15,7 @@ class IobDatasetReader(DatasetReader):
         self.token_indexers = token_indexers or {"tokens": SingleIdTokenIndexer()}
 
     @overrides
-    def text_to_instance(self, tokens: List[Token], tags: List[str] = None) -> Instance:
+    def text_to_instance(self, tokens: List[str], tags: List[str] = None) -> Instance:
         sentence_field = TextField(tokens, self.token_indexers)
         fields = {"tokens": sentence_field}
 
