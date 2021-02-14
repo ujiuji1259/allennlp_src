@@ -4,7 +4,6 @@
         "tokenizer": {
             "type": "mecab",
             "dic_path": "/opt/mecab/lib/mecab/dic/mecab-ipadic-neologd",
-            "use_user_dic": true,
             "user_dic_path": "/opt/mecab/lib/mecab/dic/MANBYO_201907_Dic-utf8.dic"
         },
         "token_indexers": {

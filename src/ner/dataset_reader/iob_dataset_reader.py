@@ -2,7 +2,7 @@ from typing import Dict, Iterator, List
 
 from allennlp.data import Instance
 from allennlp.data.dataset_readers import DatasetReader
-from allennlp.data.fields import SequenceLabelField, TextField
+from allennlp.data.fields import SequenceLabelField, TextField, MetadataField
 from allennlp.data.token_indexers import SingleIdTokenIndexer, TokenIndexer
 from allennlp.data.tokenizers import Token
 from overrides import overrides
@@ -18,6 +18,7 @@ class IobDatasetReader(DatasetReader):
     def text_to_instance(self, tokens: List[str], tags: List[str] = None) -> Instance:
         sentence_field = TextField(tokens, self.token_indexers)
         fields = {"tokens": sentence_field}
+        fields["metadata"] = MetadataField({"words": [x.text for x in tokens]})
 
         if tags:
             label_field = SequenceLabelField(tags, sequence_field=sentence_field)

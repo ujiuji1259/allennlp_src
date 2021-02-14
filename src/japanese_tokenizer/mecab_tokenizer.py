@@ -1,4 +1,3 @@
-import os
 from typing import List, Optional
 
 from overrides import overrides
@@ -12,21 +11,21 @@ except ImportError:
     print("Please install MeCab")
     raise ImportError
 
-DIC = os.environ.get('MECAB_DIC', '')
-
 
 @Tokenizer.register("mecab")
 class MecabTokenizer(Tokenizer):
     def __init__(self,
-                 dic_path: str,
-                 use_user_dic: bool = False,
+                 dic_path: str = None,
                  user_dic_path: str = None):
 
-        if not use_user_dic:
-            self.tokenizer = MeCab.Tagger(f'-Owakati -d {dic_path}')
-        else:
-            assert user_dic_path is not None, "Please specify user dictionary path if you add user dictionary to system dictionary"
-            self.tokenizer = MeCab.Tagger(f'-Owakati -d {dic_path} -u {user_dic_path}')
+        dic_args = ""
+        if dic_path is not None:
+            dic_args += f' -d {dic_path}'
+        if user_dic_path is not None:
+            dic_args += f' -u {user_dic_path}'
+
+        print(f'-Owakati{dic_args}')
+        self.tokenizer = MeCab.Tagger(f'-Owakati{dic_args}')
 
     def tokenize(self, text: str) -> List[Token]:
         tokens = self.tokenizer.parse(text).split(' ')
