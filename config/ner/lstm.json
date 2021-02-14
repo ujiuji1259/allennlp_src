@@ -25,6 +25,7 @@
         },
         "encoder": {
             "type": "lstm",
+            "bidirectional": true,
             "input_size": 100,
             "hidden_size": 200,
             "num_layers": 1
