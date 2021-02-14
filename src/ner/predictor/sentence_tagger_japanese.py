@@ -1,10 +1,10 @@
-from typing import Dict, List
 import json
+from typing import Dict, List
 
 import numpy
 from allennlp.common.util import JsonDict
 from allennlp.data import DatasetReader, Instance
-from allennlp.data.fields import SequenceLabelField, TextField, FlagField
+from allennlp.data.fields import FlagField, SequenceLabelField, TextField
 from allennlp.models import Model
 from allennlp.predictors.predictor import Predictor
 from overrides import overrides
@@ -17,12 +17,11 @@ class MecabSentenceTaggerPredictor(Predictor):
         self,
         model: Model,
         dataset_reader: DatasetReader,
-        dic_path: str,
-        use_user_dic: bool = False,
+        dic_path: str = None,
         user_dic_path: str = None,
     ) -> None:
         super().__init__(model, dataset_reader)
-        self._tokenizer = MecabTokenizer(dic_path, use_user_dic, user_dic_path)
+        self._tokenizer = MecabTokenizer(dic_path, user_dic_path)
 
     def predic(self, sentence: str) -> JsonDict:
         return self.predict_json({"sentence": sentence})
@@ -45,7 +44,9 @@ class MecabSentenceTaggerPredictor(Predictor):
             tag = predicted_tags[i]
             # if its a U, add it to the list
             if tag[0] == "U":
-                current_tags = [t if idx == i else "O" for idx, t in enumerate(predicted_tags)]
+                current_tags = [
+                    t if idx == i else "O" for idx, t in enumerate(predicted_tags)
+                ]
                 predicted_spans.append(current_tags)
             # if its a B, keep going until you hit an L.
             elif tag[0] == "B":
@@ -76,5 +77,4 @@ class MecabSentenceTaggerPredictor(Predictor):
 
     @overrides
     def dump_line(self, outputs: JsonDict) -> str:
-        return json.dumps(outputs, ensure_ascii=False) + '\n'
-
+        return json.dumps(outputs, ensure_ascii=False) + "\n"
