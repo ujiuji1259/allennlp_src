@@ -12,7 +12,7 @@ from allennlp.modules.scalar_mix import ScalarMix
 from allennlp.modules.token_embedders.token_embedder import TokenEmbedder
 from allennlp.nn.util import batched_index_select
 
-from src.japanese_transformer_tokenizer import JapanesePretrainedTransformerTokenizer
+from src.japanese_transformer.japanese_transformer_tokenizer import JapanesePretrainedTransformerTokenizer
 
 logger = logging.getLogger(__name__)
 

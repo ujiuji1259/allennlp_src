@@ -6,7 +6,7 @@ import torch
 from allennlp.modules.token_embedders import TokenEmbedder
 from allennlp.nn import util
 
-from src.japanese_transformer_embedder import JapanesePretrainedTransformerEmbedder
+from src.japanese_transformer.japanese_transformer_embedder import JapanesePretrainedTransformerEmbedder
 
 
 @TokenEmbedder.register("japanese_pretrained_transformer_mismatched")

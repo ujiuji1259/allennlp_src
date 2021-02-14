@@ -10,7 +10,7 @@ from allennlp.data.tokenizers import Token
 from allennlp.data.token_indexers import TokenIndexer
 from allennlp.data.token_indexers.token_indexer import IndexedTokenList
 
-from src.japanese_transformer_indexer import JapanesePretrainedTransformerIndexer
+from src.japanese_transformer.japanese_transformer_indexer import JapanesePretrainedTransformerIndexer
 
 logger = logging.getLogger(__name__)
 
@@ -63,6 +63,7 @@ class JapanesePretrainedTransformerMismatchedIndexer(TokenIndexer):
         )
         self._allennlp_tokenizer = self._matched_indexer._allennlp_tokenizer
         self._tokenizer = self._matched_indexer._tokenizer
+        self._tokenizer.do_word_tokenize = False
         self._num_added_start_tokens = self._matched_indexer._num_added_start_tokens
         self._num_added_end_tokens = self._matched_indexer._num_added_end_tokens
 

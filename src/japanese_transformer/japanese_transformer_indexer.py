@@ -9,7 +9,7 @@ from allennlp.data.vocabulary import Vocabulary
 from allennlp.data.tokenizers import Token
 from allennlp.data.token_indexers.token_indexer import TokenIndexer, IndexedTokenList
 
-from src.japanese_transformer_tokenizer import JapanesePretrainedTransformerTokenizer
+from src.japanese_transformer.japanese_transformer_tokenizer import JapanesePretrainedTransformerTokenizer
 
 
 logger = logging.getLogger(__name__)
